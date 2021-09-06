@@ -354,7 +354,7 @@ LayerScope.Session = {
         }
 
         self._currentFrame = frameIndex;
-        LayerScope.FrameController.update(frameIndex, self._frames.length);
+        LayerScope.FrameController.update(frameIndex, self._frames.length, self._frames[frameIndex].myFrameStamp);
       }
 
       LayerScope.RendererNode.input(self._frames[frameIndex]);

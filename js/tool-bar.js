@@ -91,6 +91,8 @@ LayerScope.ZoomControls = {
 
 LayerScope.FrameController = {
   _$slider: 0,
+  _stampInfo: "",
+  _selectedFrame: 0,
   _$info: 0,
   _userSelection: false,
 
@@ -146,7 +148,7 @@ LayerScope.FrameController = {
   /*
    * @param {int} selectedFrame the index of the selected frame, 0-index base.
    */
-  update: function FC_update(selectedFrame, totalFrames) {
+  update: function FC_update(selectedFrame, totalFrames, frameStampInfo) {
     var max = 0;
     if (totalFrames == 0) {
       this._userSelection = false;
@@ -175,6 +177,10 @@ LayerScope.FrameController = {
       this._$slider.slider("option", "value", selectedFrame);
     }
 
+    if (selectedFrame != this._selectedFrame) {
+      this._stampInfo = frameStampInfo;
+    }
+    this._selectedFrame = selectedFrame;
     //  Update this._$info
     this._updateInfo(selectedFrame, max);
   },
@@ -182,7 +188,7 @@ LayerScope.FrameController = {
     if (totalFrames === 0) {
       this._$info.html("<span>" + LayerScope.NO_FRAMES + "</span>");
     } else {
-      this._$info.html("<span>Frame " + selectedFrame + "/" +
+      this._$info.html("<span>Frame: " + this._stampInfo+ "   "+ selectedFrame + "/" +
                         totalFrames + "</span>");
     }
   }

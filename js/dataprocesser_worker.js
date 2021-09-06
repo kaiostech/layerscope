@@ -73,6 +73,7 @@ LayerWorker.PBDataProcesser = {
       case LayerWorker.PBPacket.DataType.FRAMESTART:
         this._beginFrame({low: pbuffer.frame.value.getLowBitsUnsigned(),
                           high: pbuffer.frame.value.getHighBitsUnsigned()});
+        this._activeFrame.myFrameStamp = pbuffer.frame.value.toString();
         this._activeFrame.scale = pbuffer.frame.scale || 1.0;
         break;
       case LayerWorker.PBPacket.DataType.FRAMEEND:
